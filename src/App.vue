@@ -1,14 +1,20 @@
 <template>
-  <Alunos />
+  <div>
+    <Nav></Nav>
+    <div class="margemPrincipal">
+      <!-- :key analisa toda a rota (quando tem mais de uma para o mesmo componente) -->
+      <router-view :key="$route.fullPath"></router-view>
+    </div>
+  </div>
 </template>
 
 <script>
-import Alunos from "./components/aluno/Alunos";
+import Nav from "./components/_nav/Nav";
 
 export default {
   name: "App",
   components: {
-    Alunos,
+    Nav,
   },
 };
 </script>
@@ -36,6 +42,10 @@ table {
   width: 100%;
 }
 
+p {
+  text-align: justify;
+}
+
 table thead th {
   background-color: rgb(184, 208, 216) !important;
   font-size: 1.2em;
@@ -53,6 +63,7 @@ table tr td {
 
 .btn_Danger {
   background-color: #fa4430;
+  font-size: 0.8em !important;
 }
 
 .btn {
@@ -60,6 +71,7 @@ table tr td {
   padding: 10px 20px;
   cursor: pointer;
   color: white;
+  font-size: 1.3em;
   font-weight: bold;
   border-radius: 5px;
 }
@@ -70,9 +82,17 @@ table tr td {
 
 .colunaPequena {
   width: 5%;
+  text-align: right;
+  background-color: rgb(125, 217, 245);
+  font-weight: bold;  
 }
 
-/* #app {
+.margemPrincipal {
+  width: 50%;
+  margin: auto;
+}
 
-} */
+#app {
+  width: 100%;
+}
 </style>
