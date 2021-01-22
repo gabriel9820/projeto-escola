@@ -44,7 +44,7 @@ export default {
   },
   created() {
     // cada .then() passa o retorno para o próximo
-    this.$http.get("http://localhost:3000/alunos/").then((resposta) => {
+    this.$http.get("http://localhost:5000/api/alunos").then((resposta) => {
       this.alunos = resposta.data;
       this.getProfessores();
     });
@@ -56,7 +56,7 @@ export default {
           id: professor.id,
           nome: professor.nome,
           totalAlunos: this.alunos.filter(
-            (aluno) => aluno.professor.id == professor.id
+            (aluno) => aluno.professorId == professor.id
           ).length,
         };
 
@@ -64,7 +64,7 @@ export default {
       });
     },
     getProfessores() {
-      this.$http.get("http://localhost:3000/professores/").then((resposta) => {
+      this.$http.get("http://localhost:5000/api/professores").then((resposta) => {
         this.professores = resposta.data;
         this.getTotalAlunos();
       });

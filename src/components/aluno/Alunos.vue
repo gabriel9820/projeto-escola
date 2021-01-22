@@ -66,12 +66,12 @@ export default {
       this.getProfessor();
 
       this.$http
-        .get("http://localhost:3000/alunos?professor.id=" + this.idProfessor)
+        .get("http://localhost:5000/api/alunos/getAlunosByProfessor/" + this.idProfessor)
         .then((resposta) => {
           this.alunos = resposta.data;
         });
     } else {
-      this.$http.get("http://localhost:3000/alunos/").then((resposta) => {
+      this.$http.get("http://localhost:5000/api/alunos").then((resposta) => {
         this.alunos = resposta.data;
       });
     }
@@ -80,25 +80,25 @@ export default {
     adicionarAluno() {
       let _aluno = {
         nome: this.nome,
-        professor: this.professor,
+        professorId: this.idProfessor,
       };
 
       this.$http
-        .post("http://localhost:3000/alunos/", _aluno)
+        .post("http://localhost:5000/api/alunos", _aluno)
         .then((resposta) => {
           this.alunos.push(resposta.data);
           this.nome = "";
         });
     },
     removerAluno(aluno) {
-      this.$http.delete(`http://localhost:3000/alunos/${aluno.id}`).then(() => {
+      this.$http.delete(`http://localhost:5000/api/alunos/${aluno.id}`).then(() => {
         let indice = this.alunos.indexOf(aluno);
         this.alunos.splice(indice, 1);
       });
     },
     getProfessor() {
       this.$http
-        .get("http://localhost:3000/professores/" + this.idProfessor)
+        .get("http://localhost:5000/api/professores/" + this.idProfessor)
         .then((resposta) => {
           this.professor = resposta.data;
         });
